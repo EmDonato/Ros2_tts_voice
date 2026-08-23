@@ -1,0 +1,12 @@
+services:
+  voice_ai:
+    image: tts_voice
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    devices:
+      - /dev/snd:/dev/snd
+    environment:
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}

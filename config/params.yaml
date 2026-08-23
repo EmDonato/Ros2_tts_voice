@@ -1,0 +1,5 @@
+pipe_tts:
+  ros__parameters:
+    model_path: /voices/amy.onnx 
+    sample_rate: 22050
+    audio_device: "plughw:2,0"
