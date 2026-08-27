@@ -1,6 +1,7 @@
 services:
-  voice_ai:
-    image: tts_voice
+  open-pi-voice-ia:
+    image: open-pi-voice-ia-img
+    container_name: open-pi-voice-ia
     build:
       context: .
       dockerfile: Dockerfile

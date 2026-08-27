@@ -8,9 +8,9 @@ ARG GID=1000
 
 
 RUN groupadd -g ${GID} ${USERNAME} && \
-    useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USERNAME}
-
-    # ==========================================
+    useradd -m -u ${UID} -g ${GID} -s /bin/bash ${USERNAME} && \
+    usermod -aG audio ${USERNAME}
+# ==========================================
 # Piper voices
 # ==========================================
 
@@ -57,9 +57,11 @@ ENV RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 
 USER ${USERNAME} 
 
-RUN echo "source /opt/ros/humble/setup.bash" >> /home/voice_ia/.bashrc && \
-    echo "source /ws/install/setup.bash" >> /home/voice_ia/.bashrc
+
+RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc && \
+    echo "source /ws/install/setup.bash" >> /home/${USERNAME}/.bashrc && \
+    chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
     
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["ros2", "run", "piper_tts", "voice_tts"]
+CMD ["ros2", "run", "piper_tts", "voice_tts", "--ros-args", "--params-file", "/ws/config/params.yaml"]
