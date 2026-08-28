@@ -80,6 +80,7 @@ class VoiceTTS(Node):
         )
         self.declare_parameter("input_topic", "assistant/response")
         self.declare_parameter("startup_text", "")
+        self.declare_parameter("poweoff_text_text", "")
 
         model_path = self.get_parameter(
             "model_path"
@@ -94,6 +95,7 @@ class VoiceTTS(Node):
         ).value
         input_topic = self.get_parameter("input_topic").value
         startup_text = self.get_parameter("startup_text").value
+        self.poweroff_text = self.get_parameter("poweoff_text").value
 
         self.tts = PiperTTS(
             model_path=model_path,
@@ -121,6 +123,13 @@ class VoiceTTS(Node):
         )
         if startup_text:
             self.tts.speak(startup_text)
+
+    def shutdown(self):
+        if getattr(self, "poweroff_text", None):
+            try:
+                self.tts.speak(self.poweroff_text)
+            except Exception as exc:
+                self.get_logger().error(f"Error in the last message: {exc}")
 
     def listener_callback(self, msg: String):
 
@@ -150,7 +159,7 @@ def main(args=None):
         pass
 
     finally:
-
+        node.shutdown()
         node.destroy_node()
 
         if rclpy.ok():

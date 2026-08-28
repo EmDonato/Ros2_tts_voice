@@ -4,3 +4,4 @@ voice:
     sample_rate: 22050
     audio_device: "plughw:2,0"
     startup_text: "Voice active. Hello World!"
+    poweoff_text: "daisy... daisy.... give me your answer do, daysy......day.."
