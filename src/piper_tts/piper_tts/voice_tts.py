@@ -80,7 +80,7 @@ class VoiceTTS(Node):
         )
         self.declare_parameter("input_topic", "assistant/response")
         self.declare_parameter("startup_text", "")
-        self.declare_parameter("poweoff_text_text", "")
+        self.declare_parameter("poweoff_text", "")
 
         model_path = self.get_parameter(
             "model_path"
