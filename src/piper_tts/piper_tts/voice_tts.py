@@ -95,7 +95,7 @@ class VoiceTTS(Node):
         ).value
         input_topic = self.get_parameter("input_topic").value
         startup_text = self.get_parameter("startup_text").value
-        self.poweroff_text = self.get_parameter("poweoff_text").value
+        self.poweroff_text = self.get_parameter("poweroff_text").value
 
         self.tts = PiperTTS(
             model_path=model_path,
