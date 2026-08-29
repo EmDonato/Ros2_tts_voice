@@ -64,4 +64,4 @@ RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> /home/${USERNAME}/.bashrc
     
 ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["ros2", "run", "piper_tts", "voice_tts", "--ros-args", "--params-file", "/ws/config/params.yaml"]
+CMD ["/ws/install/lib/piper_tts/voice_tts", "voice_tts", "--ros-args", "--params-file", "/ws/config/params.yaml"]

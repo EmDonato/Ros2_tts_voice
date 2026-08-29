@@ -30,7 +30,6 @@ class PiperTTS:
             ],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
-            stderr=subprocess.DEVNULL
         )
 
         aplay = subprocess.Popen(
@@ -43,7 +42,6 @@ class PiperTTS:
                 "-t", "raw"
             ],
             stdin=piper.stdout,
-            stderr=subprocess.DEVNULL
         )
 
         if piper.stdin:
@@ -80,7 +78,7 @@ class VoiceTTS(Node):
         )
         self.declare_parameter("input_topic", "assistant/response")
         self.declare_parameter("startup_text", "")
-        self.declare_parameter("poweoff_text", "")
+        self.declare_parameter("poweroff_text", "")
 
         model_path = self.get_parameter(
             "model_path"
